@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
+    <title>tasky</title>
+</head>
+<body>
+    <h1 class="header">Tasky</h1>
+    <main class="kanban-container">
+        <div id="todo" class="column">
+            <div class="column-header">
+                <p>To Do</p>
+                <button class="button">+</button>
+            </div>
+            <hr>
+            <p class="task draggable" draggable="true">3</p>
+            <p class="task draggable" draggable="true">2</p>
+        </div>
+        <div id="in-progress" class="column">
+            <div class="column-header">
+                <p>In Progress</p>
+                <button class="button">+</button>
+            </div>
+            <hr>
+            <p class="task draggable" draggable="true">1</p>
+        </div>
+        <div id="done" class="column">
+            <div class="column-header">
+                <p>Done</p>
+                <button class="button">+</button>
+            </div>
+            <hr>
+        </div>
+    </main>
+</body>
+</html>

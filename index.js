@@ -12,7 +12,14 @@ let activeColumn = null;
 
 const addOrEditTask = () => {
     const task = document.createElement("div");
-    const taskInfo = `<p class="${priorityInput.value}">${priorityInput.value}</p><h3>${titleInput.value}</h3><p>${descInput.value}</p>`;
+    const taskInfo = `<div class="upper-container"><p class="${priorityInput.value}">${priorityInput.value}</p>
+                             <i class="fa-solid fa-ellipsis-vertical"></i></div>
+                             <div class="middle-container"><h3>${titleInput.value}</h3>
+                             <div class="icon-container hidden">
+                             <i class="fa-solid fa-pen"></i>
+                             <i class="fa-solid fa-trash"></i>
+                             </div></div>
+                             <p>${descInput.value}</p>`;
     task.className = "task draggable";
     task.draggable = true;
     task.innerHTML = taskInfo;
@@ -64,3 +71,14 @@ cancelBtn.addEventListener("click", (e) => {
     activeColumn = null;
    taskDialog.close();
 });
+
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('fa-ellipsis-vertical')) {
+        const iconContainer = e.target.parentElement.nextElementSibling.querySelector(".icon-container");
+        iconContainer.classList.toggle("hidden");
+    }
+});
+
+
+

@@ -3,12 +3,12 @@
 :root {
     --white: #f3fbff;
     --gray: #f8f8f8;
-    --green: rgba(40, 167, 69, 0.5);
+    --green: rgba(40, 167, 69, 0.3);
     --green-text: #114b1d;
     --red-text: #d92d06;
-    --red: rgba(255, 87, 51, 0.5);
+    --red: rgba(255, 87, 51, 0.3);
     --orange-text: #866b03;
-    --orange:rgba(255, 195, 0, 0.5) ;
+    --orange:rgba(255, 195, 0, 0.3) ;
 }
 
 * {
@@ -168,10 +168,6 @@ body {
     color: white;
 }
 
-hr {
-    background-color: lightgray;
-}
-
 .task {
     display: flex;
     flex-direction: column;
@@ -181,7 +177,41 @@ hr {
     background-color: white;
     border-radius: 10px;
     padding: 1rem;
+    padding-top: 0.7rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+}
+
+.upper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upper-container > i, .icon-container > i {
+    font-size: 1rem;
+    color: black;
+    cursor: pointer;
+}
+
+.middle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.icon-container {
+    text-align: right;
+    border: solid 1px gray;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+}
+
+.icon-container > i {
+    padding: 0 .6rem;
 }
 
 .Low, .Medium, .High {

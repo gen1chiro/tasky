@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --white: #F0F8FF;
+    --white: #f3fbff;
     --gray: #f8f8f8;
+    --green: rgba(40, 167, 69, 0.5);
+    --green-text: #114b1d;
+    --red-text: #d92d06;
+    --red: rgba(255, 87, 51, 0.5);
+    --orange-text: #866b03;
+    --orange:rgba(255, 195, 0, 0.5) ;
 }
 
 * {
@@ -31,7 +37,8 @@ body {
 
 .kanban-container {
     width: clamp(800px, 80vw, 1500px);
-    height: clamp(500px, 80vh,800px);
+    min-height: 600px;
+    max-height: none;
     border-radius: 50px;
     background-color: white;
     box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
@@ -51,6 +58,7 @@ body {
     gap: 10px;
     background: var(--white);
     border-radius: 20px;
+    border: solid lightgray 1px;
     padding: 1.5rem;
 }
 
@@ -63,25 +71,143 @@ body {
 
 .column-header > p {
     font-size: clamp(.5rem, 1.5rem, 1.5rem);
+    font-weight: 600;
 }
 
-.button {
+.add-button {
     height: 2rem;
     aspect-ratio: 1/1;
-    font-size: 1em;
-    font-weight: 400;
+    font-size: 1.5em;
+    font-weight: 50;
     border-radius: 50%;
     background-color: transparent;
+    text-align: center;
     border: solid 1px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    border: solid 2px;
+    font-weight: 600;
+}
+
+.task-dialog {
+    width: clamp(450px, 45vw, 600px);
+    aspect-ratio: 10/8;
+    background-color: white;
+    border-radius: 30px;
+    border: none;
+    margin: auto;
+    padding: 2rem;
+}
+
+.task-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-form > label {
+    padding-top: 1rem;
+}
+
+.task-form > div {
+    padding-top: 2rem;
+}
+
+.task-form > h1 {
+    font-size: 2.5rem;
+}
+
+#task-title, #priority {
+    height: 2rem;
+    width: 100%;
+    padding: 0 5px;
+    font-size: 1rem;
+    background-color: var(--gray);
+    border: solid lightgray 1px;
+    border-radius: 10px;
+}
+
+#task-description {
+    width: 100%;
+    height: 20%;
+    font-size: 1rem;
+    font-family: inherit;
+    padding: 10px;
+    background-color: var(--gray);
+    border: solid lightgray 1px;
+    border-radius: 15px;
+    resize: none;
+}
+
+.button-container {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-container > button {
+    width: 50%;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.task-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirm {
+    background-color: black;
+    color: white;
+}
+
+hr {
+    background-color: lightgray;
 }
 
 .task {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
     width: 100%;
     height: auto;
     background-color: white;
     border-radius: 10px;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+}
+
+.Low, .Medium, .High {
+    width: fit-content;
+    font-size: .8rem;
+    padding: .1rem 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.Low {
+    background-color: var(--green);
+    color: var(--green-text);
+    border: solid var(--green-text) 2px;
+}
+
+.Medium {
+    background-color: var(--orange);
+    color: var(--orange-text);
+    border: solid var(--orange-text) 2px;
+}
+
+.High {
+    background-color: var(--red);
+    color: var(--red-text);
+    border: solid var(--red-text) 2px;
 }
 
 .task:hover {

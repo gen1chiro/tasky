@@ -26,6 +26,7 @@ const addTask = () => {
     task.draggable = true;
     task.innerHTML = taskInfo;
     activeColumn.appendChild(task);
+    updateTaskCount(activeColumn);
 }
 
 const editTask = (task) => {
@@ -35,6 +36,11 @@ const editTask = (task) => {
     taskPriority.classList.replace(taskPriorityClasses[1], priorityInput.value);
     task.querySelector(".task-title").textContent = titleInput.value;
     task.querySelector(".task-desc").textContent = descInput.value;
+}
+
+const updateTaskCount = (container) => {
+    const tasks = container.querySelectorAll(".task");
+    container.querySelector(".task-count").textContent = tasks.length;
 }
 
 const extractTaskData = (task) => {
@@ -50,6 +56,7 @@ const clearForm = () => {
 }
 
 containers.forEach(container => {
+    updateTaskCount(container);
     container.addEventListener("dragover", event => {
         event.preventDefault();
         const element = document.querySelector(".dragging");
@@ -96,7 +103,9 @@ document.addEventListener('click', (e) => {
     }
 
     if (e.target.classList.contains("fa-trash")) {
+        const column = e.target.closest(".column");
         e.target.closest(".task").remove();
+        updateTaskCount(column);
     }
 });
 
@@ -109,6 +118,9 @@ document.addEventListener("dragstart", (e) => {
 document.addEventListener("dragend", (e) => {
     if (e.target.classList.contains("draggable")) {
         e.target.classList.remove("dragging");
+        containers.forEach(container => {
+            updateTaskCount(container);
+        })
     }
 });
 

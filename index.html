@@ -12,7 +12,10 @@
     <main class="kanban-container">
         <div id="todo" class="column">
             <div class="column-header">
-                <p>To Do</p>
+                <div>
+                    <p>To Do</p>
+                    <p class="task-count-container">(<span class="task-count"></span>)</p>
+                </div>
                 <button class="add-button">+</button>
             </div>
             <div class="task draggable" draggable="true">
@@ -32,13 +35,19 @@
         </div>
         <div id="in-progress" class="column">
             <div class="column-header">
-                <p>In Progress</p>
+                <div>
+                    <p>In Progress</p>
+                    <p class="task-count-container">(<span class="task-count"></span>)</p>
+                </div>
                 <button class="add-button">+</button>
             </div>
         </div>
         <div id="done" class="column">
             <div class="column-header">
-                <p>Done</p>
+                <div>
+                    <p>Done</p>
+                    <p class="task-count-container">(<span class="task-count"></span>)</p>
+                </div>
                 <button class="add-button">+</button>
             </div>
         </div>

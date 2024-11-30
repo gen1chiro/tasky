@@ -55,6 +55,60 @@ const clearForm = () => {
     priorityInput.value = "Low";
 }
 
+const saveToLocalStorage = () => {
+    const kanbanData = {
+        todo: getTasksFromColumn("todo"),
+        inProgress: getTasksFromColumn("in-progress"),
+        done: getTasksFromColumn("done")
+    };
+
+    localStorage.setItem("kanbanBoard", JSON.stringify(kanbanData));
+}
+
+const loadFromLocalStorage = () => {
+    const data = localStorage.getItem("kanbanBoard");
+
+    if (data) {
+        const {todo, inProgress, done} = JSON.parse(data);
+        renderTask("todo", todo);
+        renderTask("in-progress", inProgress);
+        renderTask("done", done);
+    }
+}
+
+const renderTask = (columnId, tasks) => {
+    const column = document.getElementById(columnId);
+
+    tasks.forEach(task => {
+        const element = document.createElement("div");
+        const taskInfo = `<div class="upper-container"><p class="task-priority ${task.taskPriority}">${task.taskPriority}</p>
+                             <i class="fa-solid fa-ellipsis-vertical"></i></div>
+                             <div class="middle-container"><h3 class="task-title">${task.taskName}</h3>
+                             <div class="icon-container hidden">
+                             <i class="fa-solid fa-pen"></i>
+                             <i class="fa-solid fa-trash"></i>
+                             </div></div>
+                             <p class="task-desc">${task.taskDesc}</p>`;
+        element.className = "task draggable";
+        element.draggable = true;
+        element.innerHTML = taskInfo;
+        column.appendChild(element);
+        updateTaskCount(column);
+    });
+}
+
+const getTasksFromColumn = (columnId) => {
+    const column = document.getElementById(columnId);
+    const tasks = column.querySelectorAll(".task");
+    const tasksArray = Array.from(tasks);
+
+    return tasksArray.map(task => ({
+        taskName: task.querySelector(".task-title").textContent,
+        taskDesc: task.querySelector(".task-desc").textContent,
+        taskPriority: task.querySelector(".task-priority").textContent
+    }));
+}
+
 const getClosestTask = (container, mouseY) => {
     const tasks = [...container.querySelectorAll('.task:not(.dragging)')];
     return tasks.reduce((closest, task) => {
@@ -65,6 +119,10 @@ const getClosestTask = (container, mouseY) => {
         }
         return closest;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+const init = () => {
+    loadFromLocalStorage();
 }
 
 containers.forEach(container => {
@@ -98,6 +156,7 @@ confirmBtn.addEventListener("click", (e) => {
     activeTask = null;
     isEditing = false;
     taskDialog.close();
+    saveToLocalStorage();
 })
 
 cancelBtn.addEventListener("click", (e) => {
@@ -125,6 +184,7 @@ document.addEventListener('click', (e) => {
         const column = e.target.closest(".column");
         e.target.closest(".task").remove();
         updateTaskCount(column);
+        saveToLocalStorage();
     }
 });
 
@@ -139,9 +199,12 @@ document.addEventListener("dragend", (e) => {
         e.target.classList.remove("dragging");
         containers.forEach(container => {
             updateTaskCount(container);
-        })
+        });
+        saveToLocalStorage();
     }
 });
+
+init();
 
 
 

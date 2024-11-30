@@ -55,12 +55,31 @@ const clearForm = () => {
     priorityInput.value = "Low";
 }
 
+const getClosestTask = (container, mouseY) => {
+    const tasks = [...container.querySelectorAll('.task:not(.dragging)')];
+    return tasks.reduce((closest, task) => {
+        const box = task.getBoundingClientRect();
+        const offset = mouseY - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset, element: task };
+        }
+        return closest;
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
 containers.forEach(container => {
     updateTaskCount(container);
-    container.addEventListener("dragover", event => {
-        event.preventDefault();
+    container.addEventListener("dragover", e => {
+        e.preventDefault();
         const element = document.querySelector(".dragging");
-        container.appendChild(element);
+        if (element) {
+            const closestTask = getClosestTask(container, e.clientY);
+            if (closestTask) {
+                container.insertBefore(element, closestTask);
+            } else {
+                container.appendChild(element);
+            }
+        }
     });
 });
 

@@ -258,6 +258,10 @@ body {
     border: solid var(--red-text) 2px;
 }
 
+.task-desc {
+    white-space: pre-wrap;
+}
+
 .task:hover {
     border: solid gray 1px;
 }

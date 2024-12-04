@@ -1,5 +1,4 @@
 const containers = document.querySelectorAll(".column");
-const tasks = document.querySelectorAll(".task");
 const addTaskBtns = document.querySelectorAll(".add-button");
 const taskDialog = document.querySelector(".task-dialog");
 const confirmBtn = document.querySelector(".confirm");
@@ -121,6 +120,14 @@ const getClosestTask = (container, mouseY) => {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
+const closeIconContainers = () => {
+    const iconContainers = document.querySelectorAll(".icon-container");
+
+    iconContainers.forEach(iconContainer => {
+       iconContainer.classList.add("hidden");
+    });
+}
+
 const init = () => {
     loadFromLocalStorage();
 }
@@ -157,18 +164,22 @@ confirmBtn.addEventListener("click", (e) => {
     isEditing = false;
     taskDialog.close();
     saveToLocalStorage();
+    closeIconContainers();
 })
 
 cancelBtn.addEventListener("click", (e) => {
     e.preventDefault();
     clearForm();
     activeColumn = null;
-   taskDialog.close();
+    isEditing = false;
+    taskDialog.close();
+    closeIconContainers();
 });
 
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('fa-ellipsis-vertical')) {
         const iconContainer = e.target.parentElement.nextElementSibling.querySelector(".icon-container");
+        closeIconContainers();
         iconContainer.classList.toggle("hidden");
     }
 

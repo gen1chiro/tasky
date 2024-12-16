@@ -1,4 +1,5 @@
 const containers = document.querySelectorAll(".column");
+const doneColumn = document.getElementById("done");
 const addTaskBtns = document.querySelectorAll(".add-button");
 const taskDialog = document.querySelector(".task-dialog");
 const confirmBtn = document.querySelector(".confirm");
@@ -6,6 +7,7 @@ const cancelBtn = document.querySelector(".cancel");
 const titleInput = document.getElementById("task-title");
 const descInput = document.getElementById("task-description");
 const priorityInput = document.getElementById("priority");
+const clearDoneColumnBtn = document.getElementById("clear-done-button");
 
 let activeColumn = null;
 let activeTask = null;
@@ -153,6 +155,12 @@ addTaskBtns.forEach(btn => {
        activeColumn = btn.closest('.column');
        taskDialog.showModal();
    })
+});
+
+clearDoneColumnBtn.addEventListener("dblclick", () => {
+    const tasksInColumn = doneColumn.querySelectorAll(".task");
+    tasksInColumn.forEach(task => task.remove());
+    saveToLocalStorage();
 });
 
 confirmBtn.addEventListener("click", (e) => {

@@ -92,6 +92,24 @@ body {
     padding: 0 .1rem;
 }
 
+.clear-container {
+    max-width: fit-content;
+}
+
+#clear-done-button {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    background-color: white;
+    transition: ease-in 100ms;
+}
+
+#clear-done-button:hover {
+    transform: scale(1.1);
+    border: 1px solid gray;
+}
+
 .add-button {
     height: 2rem;
     aspect-ratio: 1/1;

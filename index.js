@@ -172,7 +172,6 @@ confirmBtn.addEventListener("click", (e) => {
     isEditing = false;
     taskDialog.close();
     saveToLocalStorage();
-    closeIconContainers();
 })
 
 cancelBtn.addEventListener("click", (e) => {
@@ -181,13 +180,13 @@ cancelBtn.addEventListener("click", (e) => {
     activeColumn = null;
     isEditing = false;
     taskDialog.close();
-    closeIconContainers();
 });
 
 document.addEventListener('click', (e) => {
+    closeIconContainers();
+
     if (e.target.classList.contains('fa-ellipsis-vertical')) {
         const iconContainer = e.target.parentElement.nextElementSibling.querySelector(".icon-container");
-        closeIconContainers();
         iconContainer.classList.toggle("hidden");
     }
 

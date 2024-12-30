@@ -130,9 +130,9 @@ const closeIconContainers = () => {
     });
 }
 
-const init = () => {
+(() => {
     loadFromLocalStorage();
-}
+})()
 
 containers.forEach(container => {
     updateTaskCount(container);
@@ -183,7 +183,7 @@ cancelBtn.addEventListener("click", (e) => {
 });
 
 document.addEventListener('click', (e) => {
-    closeIconContainers();
+    //closeIconContainers();
 
     if (e.target.classList.contains('fa-ellipsis-vertical')) {
         const iconContainer = e.target.parentElement.nextElementSibling.querySelector(".icon-container");
@@ -222,7 +222,7 @@ document.addEventListener("dragend", (e) => {
     }
 });
 
-init();
+
 
 
 

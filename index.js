@@ -122,12 +122,9 @@ const getClosestTask = (container, mouseY) => {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-const closeIconContainers = () => {
-    const iconContainers = document.querySelectorAll(".icon-container");
-
-    iconContainers.forEach(iconContainer => {
-       iconContainer.classList.add("hidden");
-    });
+const closeIconOpenContainers = () => {
+    const iconContainer = document.querySelector(".icon-container:not(.hidden)");
+    if (iconContainer) iconContainer.classList.add("hidden");
 }
 
 (() => {
@@ -183,11 +180,20 @@ cancelBtn.addEventListener("click", (e) => {
 });
 
 document.addEventListener('click', (e) => {
-    //closeIconContainers();
+    const isIconContainer = e.target.closest(".icon-container") || e.target.classList.contains('fa-ellipsis-vertical');
+    if (!isIconContainer) {
+        closeIconOpenContainers();
+    }
 
     if (e.target.classList.contains('fa-ellipsis-vertical')) {
         const iconContainer = e.target.parentElement.nextElementSibling.querySelector(".icon-container");
-        iconContainer.classList.toggle("hidden");
+
+        if (iconContainer.classList.contains("hidden")) {
+            closeIconOpenContainers();
+            iconContainer.classList.remove("hidden");
+        } else {
+            iconContainer.classList.add("hidden");
+        }
     }
 
     if (e.target.classList.contains("fa-pen")) {
